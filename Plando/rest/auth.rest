@@ -1,0 +1,71 @@
+@url = https://localhost:5001
+@admin_token = bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidW5pcXVlX25hbWUiOiIxIiwianRpIjoiOThhMDYxNzctMzVkNi00MzQzLTg2MzUtYzBlYTU4ZDczZmMwIiwiaWF0IjoiMTYwODA0NzM5MiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE2MDgwNDczOTIsImV4cCI6MTYwODA0NzY5MiwiaXNzIjoicGxhbmRvX2lzc3VlciJ9.9vJ863Mk7LSkwJWn5rc_NSKeA7Ajd8RQ3L0eudagd5A
+
+@user_token = bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidW5pcXVlX25hbWUiOiIyIiwianRpIjoiOTc2YmY1YjAtN2JkOS00ODM3LTg2YjAtNDk5MzA3YWI2YWY2IiwiaWF0IjoiMTYwODA0NzQyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYwODA0NzQyNywiZXhwIjoxNjA4MDQ3NzI3LCJpc3MiOiJwbGFuZG9faXNzdWVyIn0.7IOuC-YsPqqnRIPTv7_djc15h-v6ZNI4DNdNL1yJrf8
+
+@manager_token = bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwidW5pcXVlX25hbWUiOiIzIiwianRpIjoiNzM4NTBiZGYtY2UxMi00YmU4LWI5Y2UtNDJiODVmYmU0YzRkIiwiaWF0IjoiMTYwODA0ODE2MCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJuYmYiOjE2MDgwNDgxNjAsImV4cCI6MTYwODA0ODQ2MCwiaXNzIjoicGxhbmRvX2lzc3VlciJ9.ufnFm1Fx1uWLW2awt_jXrGOypi6ra3yQrD1yJcFijjQ
+
+###
+
+POST {{url}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "Ilya",
+    "lastName": "Katun",
+    "email": "ilya.katun@mail.com",
+    "password": "123QWEasd!"
+}
+
+###
+
+POST {{url}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "ilya.katun@mail.com",
+    "password": "123QWEasd!"
+}
+
+###
+
+POST {{url}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "admin@plando.com",
+    "password": "ASDqwe!@#"
+}
+
+###
+
+POST {{url}}/auth/register/manager HTTP/1.1
+Content-Type: application/json
+Authorization: {{admin_token}}
+
+{
+    "firstName": "Viktoria",
+    "lastName": "Dzuba",
+    "email": "d.vik@mail.com",
+    "password": "123QWEasd!"
+}
+
+###
+
+POST {{url}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "Van.Bernhard@gmail.com",
+    "password": "saeaaaiaia"
+}
+
+###
+
+GET {{url}}/users HTTP/1.1
+Authorization: {{admin_token}}
+
+###
+
+GET {{url}}/profile HTTP/1.1
+Authorization: {{manager_token}}
